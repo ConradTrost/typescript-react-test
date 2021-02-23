@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App {
+  width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.button {
+  width: auto;
+  padding: 15px;
+  background: rgba(62, 62, 202, 0.822);
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  margin: 20px;
+}
+
+.submitForm input {
+  border-radius: 0;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px 10px 0px ;
+}
+
+.submitText {
+  border-right: 1px;
+}
+
+.submitBtn {
+  border-left: 0;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.button:focus {
+  border: 0;
+}
