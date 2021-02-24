@@ -28,18 +28,28 @@ code {
   margin: 20px;
 }
 
+.submitForm label {
+  display: inline-block;
+  width: 100%;
+}
+
 .submitForm input {
   border-radius: 0;
-  border: 1px solid #3a3a3a;
-  border-radius: 10px 10px 0px ;
+  border: 1px solid #adadad;
+  padding: 5px;
+  display: block;
+    width: 100%;
+  margin: 20px;
 }
 
 .submitText {
-  border-right: 1px;
+  border: 0;
 }
 
 .submitBtn {
   border-left: 0;
+  background:rgba(62, 62, 202, 0.822);
+  color: white;
 }
 
 .button:hover {

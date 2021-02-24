@@ -1,75 +1,56 @@
 import React, { useState } from 'react'
-import { createSuper } from 'typescript';
 
-
+// use to pass props to App component
 interface Props {
-  count?: number;
-  setCount?: React.Dispatch<React.SetStateAction<number>>;
-  user?: Array<{name: string, id: number}>;
-  setUser?: React.Dispatch<React.SetStateAction<string>>;
-  id?: number;
+
 }
 
-let i = 0;
-
-let userArray: Array<{user: string, id: number}> = [];
-
 const App : React.FC<Props> = () => {
-  const [count, setCount] = useState(0);
-  const [user, setUser] = useState('');
+  const [name, setName] = useState('');
+  const [nameStore, setNameStore] = useState('');
 
-  const createUser = (name: string, number: number) => {
-    return {
-      user: name,
-      id: number,
-    }
+  const [birthday, setBirthday] = useState<number>();
+  const [birthdayStore, setBirthdayStore] =useState('');
+
+  const runNum = (props: string) => {
+    let x = props.split('-');
+    let xMonth = parseInt(x[2]);
+    let date = new Date();
+    let currentMonth = date.getUTCMonth();
+    let monthsLeft: number = xMonth - currentMonth;
+    return monthsLeft;
   }
 
-  const clickHandlerIterate = (e: React.MouseEvent) => {
-    setCount(count + 1);
-    e.preventDefault();
-  }
-
-  const formChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-    // sets the user as current
-    setUser(e.target.value);
-
-
-    e.preventDefault();
-  }
-
-  const clickHandleUser = (e: React.FormEvent<HTMLFormElement>) => {
-    i = userArray.length | 0;
-    i++;
-    const person: any = {
-      user: e.target.value,
-      id: i,
-    };
-    userArray.push(person);
-    console.log(userArray);
-    userArray.push({user, id: 2});
-    e.preventDefault();
-  }
 
   return (
     <div className="App">
-      <h1>{count}</h1>
-      <button className="button" onClick={clickHandlerIterate}>You Push My Buttons</button>
-      <form className="submitForm" onSubmit={clickHandleUser} >
-        <input type="text" className="submitText" onChange={formChangeHandler} />
-        <input type="submit" className="submitBtn" />
+      <h1>{name ? `Nice to meet you, ` + name + `!` : `What is your name?`}</h1>
+      <form className="submitForm" onSubmit={((e) => {
+        setName(nameStore);
+        let y = runNum(birthdayStore);
+        setBirthday(y);
+        e.preventDefault();
+      }
+      )} >
+        <input type="text" className="submitText" onChange={((e) => {
+          setNameStore(e.target.value);
+          e.preventDefault();
+        })} />
+        <label>When is your birthday?
+          <input type="date" name="birthday" onChange={((e) => {
+            setBirthdayStore(e.target.value);
+            e.preventDefault();
+          })} />
+        </label>
+        <input type="submit" className="submitBtn" value="submit" />
       </form>
+      
+      <div>
+        {birthday ? 
+        `You have ` + birthday + ` months until your birthday!`
+        : '' }
+      </div>
 
-      <ul>
-        {userArray.map((user, id) => (
-          <ul>
-            <li>{user}</li>
-            <li>{id}</li>
-          </ul>
-        ), [])
-    }
-      </ul>
     </div>
   );
 }
